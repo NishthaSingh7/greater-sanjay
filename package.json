@@ -1,0 +1,59 @@
+{
+  "name": "greater-sanjay",
+  "version": "1.0.0",
+  "description": "Greater Sanjay — universal screen-based control layer for macOS (Cursor Buildathon)",
+  "main": "dist/main/main.js",
+  "author": "Nishtha Singh & Samarth Goyal (https://github.com/igoyalsamarth)",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.renderer.json && npm run copy:assets",
+    "copy:assets": "copyfiles -u 2 \"src/renderer/*.{html,css}\" dist/renderer",
+    "watch:assets": "node scripts/watch-assets.mjs",
+    "watch": "concurrently -n main,renderer,assets \"tsc -p tsconfig.json -w\" \"tsc -p tsconfig.renderer.json -w\" \"npm run watch:assets\"",
+    "start": "npm run build && env -u ELECTRON_RUN_AS_NODE electron .",
+    "dev": "npm run copy:assets && concurrently -k -n watch,electron \"npm run watch\" \"wait-on dist/main/main.js && env -u ELECTRON_RUN_AS_NODE electron .\"",
+    "package": "npm run build && electron-builder",
+    "verify": "npm run build && node scripts/verify-core.mjs"
+  },
+  "build": {
+    "appId": "com.greatersanjay.app",
+    "productName": "Greater Sanjay",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": "dmg",
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "hardenedRuntime": true,
+      "extendInfo": {
+        "NSAppleEventsUsageDescription": "Greater Sanjay needs to control other applications to complete tasks.",
+        "NSScreenCaptureDescription": "Greater Sanjay captures screenshots to understand the current UI state."
+      }
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "concurrently": "^10.0.4",
+    "copyfiles": "^2.4.1",
+    "electron": "^43.2.0",
+    "electron-builder": "^26.15.3",
+    "typescript": "^7.0.2",
+    "wait-on": "^9.1.0"
+  },
+  "dependencies": {
+    "@nut-tree-fork/nut-js": "^4.2.6",
+    "zod": "^4.4.3"
+  }
+}
