@@ -4,117 +4,115 @@
     <meta charset="UTF-8" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Greater Sanjay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="noise" aria-hidden="true"></div>
-    <div class="aurora aurora--1" aria-hidden="true"></div>
-    <div class="aurora aurora--2" aria-hidden="true"></div>
+    <div class="atmosphere" aria-hidden="true">
+      <div class="atmosphere__wash"></div>
+      <div class="atmosphere__beam"></div>
+      <div class="atmosphere__noise"></div>
+    </div>
 
-    <div class="shell">
-      <aside class="sidebar">
-        <div class="sidebar__brand">
-          <div class="logo-ring">
-            <span class="logo-letter">G</span>
-            <span class="logo-letter logo-letter--accent">S</span>
+    <div class="app">
+      <header class="topbar">
+        <div class="topbar__brand">
+          <div class="mark" aria-hidden="true">
+            <span class="mark__ring"></span>
+            <span class="mark__core"></span>
           </div>
-          <div class="sidebar__titles">
-            <span class="sidebar__name">Greater Sanjay</span>
-            <span class="sidebar__tag">Ollama · local AI</span>
+          <div class="topbar__titles">
+            <h1 class="topbar__name">Greater Sanjay</h1>
+            <p class="topbar__tag">Universal desktop control</p>
           </div>
         </div>
 
-        <nav class="sidebar__nav" aria-label="Sections">
-          <a href="#vision" class="nav-link nav-link--active">
-            <span class="nav-link__icon">◎</span>
-            Live Feed
-          </a>
-          <a href="#mission" class="nav-link">
-            <span class="nav-link__icon">▶</span>
-            Mission
-          </a>
-          <a href="#terminal" class="nav-link">
-            <span class="nav-link__icon">›_</span>
-            Terminal
-          </a>
-          <a href="#config" class="nav-link">
-            <span class="nav-link__icon">◈</span>
-            Config
-          </a>
+        <nav class="topbar__nav" aria-label="Sections">
+          <a href="#vision" class="nav-pill nav-pill--active">Feed</a>
+          <a href="#mission" class="nav-pill">Mission</a>
+          <a href="#terminal" class="nav-pill">Stream</a>
+          <a href="#config" class="nav-pill">Config</a>
         </nav>
 
-        <div class="sidebar__status">
-          <div class="status-orb" id="loop-status-pill" data-status="idle">Idle</div>
-          <div class="task-timer hidden" id="task-timer" aria-live="polite">60s</div>
-          <p class="status-hint">Agent loop</p>
-        </div>
-
-        <div class="sidebar__footer">
-          <p>Plan → See → Act → Verify</p>
-        </div>
-      </aside>
-
-      <main class="main">
-        <section class="alert alert--warn hidden" id="permission-banner">
-          <div class="alert__icon">⚠</div>
-          <div class="alert__body">
-            <strong>Permissions needed</strong>
-            <p id="permission-message">Grant Accessibility and Screen Recording to run tasks.</p>
+        <div class="topbar__meta">
+          <div class="loop-rail" aria-hidden="true">
+            <span>Plan</span><i></i><span>See</span><i></i><span>Act</span><i></i><span>Verify</span>
           </div>
-          <div class="alert__actions">
-            <button type="button" class="chip" id="open-accessibility">Accessibility</button>
-            <button type="button" class="chip" id="open-screen">Screen Recording</button>
-            <button type="button" class="chip chip--hot" id="refresh-permissions">Refresh</button>
+          <div class="status-cluster">
+            <div class="status-orb" id="loop-status-pill" data-status="idle">Idle</div>
+            <div class="task-timer hidden" id="task-timer" aria-live="polite">60s</div>
           </div>
-        </section>
+        </div>
+      </header>
 
-        <!-- Hero: Live screenshot feed -->
-        <section class="card card--vision card--hero" id="vision">
-          <header class="card__head">
-            <div>
-              <span class="card__label">01 · Live Feed</span>
+      <section class="alert alert--warn hidden" id="permission-banner">
+        <div class="alert__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+            <path d="M10 3.5L17.5 16.5H2.5L10 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M10 8.5V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="10" cy="14" r="0.75" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="alert__body">
+          <strong>Permissions needed</strong>
+          <p id="permission-message">Grant Accessibility and Screen Recording to run tasks.</p>
+        </div>
+        <div class="alert__actions">
+          <button type="button" class="chip" id="open-accessibility">Accessibility</button>
+          <button type="button" class="chip" id="open-screen">Screen Recording</button>
+          <button type="button" class="chip chip--hot" id="refresh-permissions">Refresh</button>
+        </div>
+      </section>
+
+      <div class="stage">
+        <section class="feed" id="vision">
+          <div class="feed__toolbar">
+            <div class="feed__title">
+              <span class="eyebrow">Live Feed</span>
               <h2>What the agent sees</h2>
             </div>
             <div class="feed-badges">
               <span class="rec-dot" aria-hidden="true"></span>
               <span class="feed-badge" id="feed-badge">Idle</span>
             </div>
-          </header>
+          </div>
 
-          <div class="monitor monitor--hero">
-            <div class="monitor__bezel">
-              <div class="monitor__screen">
-                <div class="monitor__scan" aria-hidden="true"></div>
-                <img id="screenshot-preview" class="hidden" alt="Latest screenshot" />
-                <div class="monitor__empty" id="screenshot-placeholder">
-                  <span class="monitor__icon">◫</span>
-                  <span>Launch a task — frames update here in real time</span>
+          <div class="viewport">
+            <div class="viewport__frame">
+              <div class="viewport__scan" aria-hidden="true"></div>
+              <img id="screenshot-preview" class="hidden" alt="Latest screenshot" />
+              <div class="viewport__empty" id="screenshot-placeholder">
+                <div class="viewport__reticule" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span>
                 </div>
+                <p>Launch a task — frames update here in real time</p>
               </div>
             </div>
-            <div class="monitor__meta" id="screenshot-meta"></div>
+            <div class="viewport__meta" id="screenshot-meta"></div>
           </div>
         </section>
 
-        <div class="workspace">
-          <!-- Mission -->
-          <section class="card card--mission" id="mission">
-            <header class="card__head">
-              <div>
-                <span class="card__label">02 · Mission Control</span>
-                <h2>What should I do?</h2>
-              </div>
-            </header>
+        <aside class="ops">
+          <section class="ops__mission" id="mission">
+            <div class="ops__head">
+              <span class="eyebrow">Mission Control</span>
+              <h2>What should I do?</h2>
+            </div>
 
             <div class="command-box">
-              <span class="command-prompt">&gt;</span>
+              <span class="command-prompt" aria-hidden="true">&gt;</span>
               <textarea
                 id="task-input"
-                rows="3"
+                rows="4"
                 placeholder="Open Spotify and play music · Start a Google Meet with camera off · Open Terminal"
               ></textarea>
             </div>
@@ -130,86 +128,84 @@
 
             <div class="action-bar">
               <button type="button" class="launch-btn" id="start-btn">
-                <span class="launch-btn__ring"></span>
+                <span class="launch-btn__glow" aria-hidden="true"></span>
                 <span class="launch-btn__text">Launch Agent</span>
               </button>
               <button type="button" class="btn btn--stop" id="stop-btn" disabled>Abort</button>
-              <button type="button" class="btn btn--ghost" id="capture-btn">Snap Screen</button>
+              <button type="button" class="btn btn--ghost" id="capture-btn">Snap</button>
             </div>
 
             <p class="hint">
-              <span class="hint__dot"></span>
-              Window stays open — live screenshots update in the feed above while the agent works.
+              <span class="hint__dot" aria-hidden="true"></span>
+              Live screenshots stay in the feed while the agent works.
             </p>
             <p class="error-msg hidden" id="task-error"></p>
           </section>
 
-          <!-- Terminal log -->
-          <section class="card card--terminal" id="terminal">
-            <header class="card__head card__head--terminal">
+          <section class="ops__stream" id="terminal">
+            <div class="ops__head ops__head--row">
               <div>
-                <span class="card__label">03 · Action Stream</span>
-                <h2>Terminal output</h2>
+                <span class="eyebrow">Action Stream</span>
+                <h2>Terminal</h2>
               </div>
               <div class="terminal-chrome" aria-hidden="true">
                 <span></span><span></span><span></span>
               </div>
-            </header>
+            </div>
             <div class="terminal" id="action-log">
-              <p class="terminal__empty placeholder">// no actions yet — start a task above</p>
+              <p class="terminal__empty placeholder">// no actions yet — start a task</p>
             </div>
           </section>
+        </aside>
+      </div>
+
+      <section class="config-rail" id="config">
+        <div class="config-rail__intro">
+          <span class="eyebrow">Ollama Config</span>
+          <h2>Models &amp; limits</h2>
+          <p class="config-note">
+            100% local via Ollama.<br />
+            <code>ollama pull qwen2.5vl:7b</code><br />
+            <code>ollama pull deepseek-r1:8b</code>
+          </p>
         </div>
 
-        <!-- Settings -->
-        <section class="card card--config" id="config">
-          <header class="card__head">
-            <div>
-              <span class="card__label">04 · Ollama Config</span>
-              <h2>Models &amp; limits</h2>
-            </div>
-          </header>
+        <div class="config-grid">
+          <label class="config-field config-field--wide">
+            <span>Ollama endpoint</span>
+            <input id="ollama-endpoint" type="text" value="http://127.0.0.1:11434" />
+          </label>
+          <label class="config-field">
+            <span>Vision model</span>
+            <input id="model" type="text" value="qwen2.5vl:7b" />
+          </label>
+          <label class="config-field">
+            <span>Reasoning model</span>
+            <input id="reasoning-model" type="text" value="deepseek-r1:8b" />
+          </label>
+          <label class="config-field">
+            <span>Max iterations</span>
+            <input id="max-iterations" type="number" min="1" max="50" value="35" />
+          </label>
+          <label class="config-field">
+            <span>Target time (s)</span>
+            <input id="task-timeout" type="number" min="15" max="90" value="60" />
+          </label>
+          <label class="config-field">
+            <span>Token budget</span>
+            <input id="token-budget" type="number" min="70" max="1120" step="70" value="280" />
+          </label>
+          <label class="config-field config-field--wide config-field--toggle">
+            <input id="keep-app-visible" type="checkbox" checked />
+            <span>Keep app visible during tasks</span>
+          </label>
+        </div>
 
-          <div class="config-grid">
-            <label class="config-field config-field--wide">
-              <span>Ollama endpoint</span>
-              <input id="ollama-endpoint" type="text" value="http://127.0.0.1:11434" />
-            </label>
-            <label class="config-field config-field--wide">
-              <span>Vision model (screenshots)</span>
-              <input id="model" type="text" value="qwen2.5vl:7b" />
-            </label>
-            <label class="config-field config-field--wide">
-              <span>Reasoning model (planning)</span>
-              <input id="reasoning-model" type="text" value="deepseek-r1:8b" />
-            </label>
-            <label class="config-field">
-              <span>Max iterations</span>
-              <input id="max-iterations" type="number" min="1" max="50" value="35" />
-            </label>
-            <label class="config-field">
-              <span>Target time (seconds)</span>
-              <input id="task-timeout" type="number" min="15" max="90" value="60" />
-            </label>
-            <label class="config-field">
-              <span>Visual token budget</span>
-              <input id="token-budget" type="number" min="70" max="1120" step="70" value="280" />
-            </label>
-            <label class="config-field config-field--wide config-field--toggle">
-              <input id="keep-app-visible" type="checkbox" checked />
-              <span>Keep app visible during tasks (live feed in UI)</span>
-            </label>
-          </div>
-
-          <p class="config-note">
-            Target: tasks run up to 60 seconds (configurable below).<br />
-            100% local via Ollama — pull models first:<br />
-            <code>ollama pull qwen2.5vl:7b</code> · <code>ollama pull deepseek-r1:8b</code>
-          </p>
+        <div class="config-rail__actions">
           <button type="button" class="btn btn--save" id="save-settings">Save configuration</button>
           <p class="save-ok hidden" id="settings-saved">✓ Saved</p>
-        </section>
-      </main>
+        </div>
+      </section>
     </div>
 
     <script type="module" src="index.js"></script>
