@@ -44,16 +44,16 @@
     }
   },
   "devDependencies": {
-    "@types/node": "^26.1.1",
-    "concurrently": "^10.0.4",
+    "@types/node": "^26.6.7",
+    "concurrently": "^10.0.7",
     "copyfiles": "^2.4.1",
-    "electron": "^43.2.0",
-    "electron-builder": "^26.15.3",
+    "electron": "^43.8.12",
+    "electron-builder": "^26.18.0",
     "typescript": "^7.0.2",
-    "wait-on": "^9.1.0"
+    "wait-on": "^9.5.1"
   },
   "dependencies": {
     "@nut-tree-fork/nut-js": "^4.2.6",
-    "zod": "^4.4.3"
+    "zod": "^4.6.7"
   }
 }
